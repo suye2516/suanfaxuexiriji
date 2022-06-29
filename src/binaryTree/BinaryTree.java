@@ -1,6 +1,6 @@
 package binaryTree;
 
-import java.util.Stack;
+import java.util.*;
 
 public class BinaryTree {
     public static class Node{
@@ -64,6 +64,25 @@ public class BinaryTree {
             }
         }
     }
+    //栈实现后序遍历优化
+    public static void pos_Stack2(Node h){
+        Stack<Node> s1=new Stack<>();
+        Node c=null;
+        s1.push(h);
+        while (!s1.isEmpty()){
+            c=s1.peek();
+            if(c.left!=null&&h!=c.left&&h!=c.right){
+                s1.push(c.left);
+            }
+            else if(c.right!=null&&h!=c.right){
+                s1.push(c.right);
+            }
+            else {
+                System.out.print(s1.pop().value+" ");
+                h=c;
+            }
+        }
+    }
     //递归中序
     public static void in(Node head){
         in(head.left);
@@ -83,6 +102,23 @@ public class BinaryTree {
                     head=s.pop();
                     System.out.print(head.value+" ");
                     head=head.right;
+                }
+            }
+        }
+    }
+    //层序遍历
+    public static void cengXu(Node h){
+        Queue<Node> q=new LinkedList<>();
+        if(h!=null){
+            q.add(h);
+            while (!q.isEmpty()){
+                h=q.poll();
+                System.out.print(h.value+" ");
+                if(h.left!=null){
+                    q.add(h.left);
+                }
+                if(h.right!=null){
+                    q.add(h.right);
                 }
             }
         }
